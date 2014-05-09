@@ -37,35 +37,35 @@ app.get('/move/:direction', function (req, res) {
     } else {
         if(direction == 'up') {
             drone_client.up(0.2);
-            drone_client.after(1000, function() {
+            drone_client.after(100, function() {
                 this.stop();
             })
         } else if (direction == 'down') {
             drone_client.down(0.2);
-            drone_client.after(1000, function() {
+            drone_client.after(100, function() {
                 this.stop();
             })
 
         } else  if (direction == 'left') {
             drone_client.left(0.2);
-            drone_client.after(1000, function() {
+            drone_client.after(100, function() {
                 this.stop();
             })
 
         } else  if (direction == 'right') {
             drone_client.right(0.2);
-            drone_client.after(1000, function() {
+            drone_client.after(100, function() {
                 this.stop();
             })
 
         } else  if (direction == 'front') {
             drone_client.up(0.2);
-            drone_client.after(1000, function() {
+            drone_client.after(100, function() {
                 this.stop();
             })
         } else  if (direction == 'back') {
             drone_client.up(0.2);
-            drone_client.after(1000, function() {
+            drone_client.after(100, function() {
                 this.stop();
             })
         }
@@ -82,12 +82,12 @@ app.get('/rotate/:direction', function (req, res) {
     } else {
         if(direction == 'clockwise') {
             drone_client.up(0.2);
-            drone_client.after(1000, function() {
+            drone_client.after(100, function() {
                 this.stop();
             })
         } else if (direction == 'anticlockwise') {
             drone_client.down(0.2);
-            drone_client.after(1000, function() {
+            drone_client.after(100, function() {
                 this.stop();
             })
         }
