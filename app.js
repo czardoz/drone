@@ -64,12 +64,12 @@ app.get('/move/:direction', function (req, res) {
             })
 
         } else  if (direction == 'front') {
-            drone_client.up(0.2);
+            drone_client.front(0.2);
             drone_client.after(100, function() {
                 this.stop();
             })
         } else  if (direction == 'back') {
-            drone_client.up(0.2);
+            drone_client.back(0.2);
             drone_client.after(100, function() {
                 this.stop();
             })

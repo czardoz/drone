@@ -83,9 +83,14 @@ def main(controller):
                     if direction in ['up', 'down', 'left', 'right', 'front', 'back']:
                         logging.warn('Moving: {}'.format(direction))
                         controller.move(direction)
+                    # elif direction in ['clockwise', 'anticlockwise']:
+                    #     logging.warn('Rotating: {}'.format(direction))
                     elif direction == 'land':
                         logging.warn('Landing')
                         controller.land()
+                    # elif direction == 'takeoff':
+                    #     logging.warn('Take Off')
+                    #     controller.takeoff()
                 else:
                     logging.warn('Unable to decode!')
             time.sleep(1)
