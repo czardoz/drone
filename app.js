@@ -87,12 +87,12 @@ app.get('/rotate/:direction', function (req, res) {
         console.log('Invalid direction received: ' + direction);
     } else {
         if(direction == 'clockwise') {
-            drone_client.up(0.2);
+            drone_client.clockwise(0.2);
             drone_client.after(100, function() {
                 this.stop();
             })
         } else if (direction == 'anticlockwise') {
-            drone_client.down(0.2);
+            drone_client.counterClockwise(0.2);
             drone_client.after(100, function() {
                 this.stop();
             })
