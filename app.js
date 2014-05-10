@@ -4,7 +4,7 @@ var ar_drone = require('ar-drone');
 // Create Client
 var drone_client = ar_drone.createClient();
 drone_client.disableEmergency();
-drone_client.on('navdata', console.log);
+
 
 // Connect to image stream
 var pngStream = drone_client.getPngStream();
@@ -15,6 +15,11 @@ pngStream
         lastPng = pngBuffer;
     });
 
+// Collect Navdata
+var navdata;
+drone_client.on('navdata', function(data) {
+    navdata = data;
+});
 
 var app = express();
 
@@ -24,6 +29,7 @@ app.get('/image', function (req, res) {
         return;
     }
     res.writeHead(200, {'Content-Type': 'image/png'});
+    console.log('Sending Image');
     res.end(lastPng);
 });
 
@@ -69,6 +75,7 @@ app.get('/move/:direction', function (req, res) {
                 this.stop();
             })
         }
+        res.end('success');
     }
 });
 
@@ -91,6 +98,7 @@ app.get('/rotate/:direction', function (req, res) {
                 this.stop();
             })
         }
+        res.end('success');
     }
 });
 
@@ -99,9 +107,22 @@ app.get('/takeoff', function (req, res) {
     res.send('success');
 });
 
+
+app.get('/stop', function (req, res) {
+    drone_client.stop();
+    res.send('success');
+});
+
+
 app.get('/land', function (req, res) {
     drone_client.land();
     res.end('success');
+});
+
+app.get('/navdata', function (req, res) {
+    var json_response = JSON.stringify(navdata);
+    res.setHeader('Content-Type','application/json');
+    res.end(json_response);
 });
 
 app.listen(3000);
