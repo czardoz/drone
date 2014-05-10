@@ -6,7 +6,7 @@ var drone_client = ar_drone.createClient();
 drone_client.disableEmergency();
 
 
-// Connect to image stream
+//Connect to image stream
 var pngStream = drone_client.getPngStream();
 var lastPng;
 pngStream
@@ -29,7 +29,6 @@ app.get('/image', function (req, res) {
         return;
     }
     res.writeHead(200, {'Content-Type': 'image/png'});
-    console.log('Sending Image');
     res.end(lastPng);
 });
 
