@@ -1,9 +1,8 @@
 import requests
 import urlparse
-import pygame
 import time
 import logging
-import traceback
+import qrtools
 
 from StringIO import StringIO
 from PIL import Image
@@ -68,27 +67,16 @@ class Controller(object):
             return None
 
 
-def main(controller, screen):
+def main(controller):
     run = True
-
     controller.takeoff()
-
     try:
         while run:
             image = controller.image()
-            try:
-                mode = image.mode
-                size = image.size
-                data = image.tostring()
-                surface = pygame.image.fromstring(data, size, mode)
-            except pygame.error:
-                logging.warn('Unable to load image')
-                traceback.print_exc()
-                time.sleep(1)
-                continue
-            screen.blit(surface, (0, 0))
-            pygame.display.flip()
-            time.sleep(1)
+
+
+
+            time.sleep(0.1)
     except KeyboardInterrupt:
         controller.stop()
         controller.land()
@@ -97,6 +85,4 @@ def main(controller, screen):
 if __name__ == '__main__':
 
     controller = Controller('http://localhost:3000')
-    screen = pygame.display.set_mode((480, 320))
-    pygame.init()
-    main(controller, screen)
+    main(controller)
